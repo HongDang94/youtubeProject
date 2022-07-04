@@ -4,3 +4,4 @@ interface IProduct {
   imgUrl: string,
   author: string,
 }
+

@@ -6,8 +6,10 @@ interface IYoutubeItemProps {
 
 function YoutubeItem({product} : IYoutubeItemProps) {
   return (
-    <div>
-      
+    <div className='product-item'>
+      <img src={product.imgUrl} alt={product.name} />
+      <strong>{product.name}</strong>
+      <p>{product.author}</p>
     </div>
   );
 }
