@@ -1,20 +1,6 @@
 import { useEffect, useState } from 'react';
 import YoutubeItem from './YoutubeItem';
 
-const DefaultListYoutube = [
-  {
-    id: 1,
-    name: "kenh youtube1",
-    imgUrl: "https://picsum.photos/168/94",
-    author: "dang hong",
-  },
-  {
-    id: 2,
-    name: "kenh youtube 2",
-    imgUrl: "https://picsum.photos/168/94",
-    author: "hong hihi",
-  }
-]
 
 function YoutubeList() {
   const [error, setError] = useState(null);
@@ -25,12 +11,14 @@ function YoutubeList() {
   // this useEffect will run once
   // similar to componentDidMount()
   useEffect(() => {
-    fetch("https://api.example.com/items")
+    fetch("https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyAu98HTMZj3bKE4K6YpZ9Q2hN_C8WMn4DY&part=snippet,contentDetails,statistics,status")
       .then(res => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
           setItems(result);
+          
+      console.log(result)
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -39,23 +27,23 @@ function YoutubeList() {
           setIsLoaded(true);
           setError(error);
         }
+        
       )
   }, [])
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
+  // if (error) {
+  //   return <div>Error: {error.message}</div>;
+  // } else if (!isLoaded) {
+  //   return <div>Loading...</div>;
+  // } else {
   return (
-    <div>
-      {DefaultListYoutube.map((item) => {
-        return <YoutubeItem key={item.id} id={item.id} name={item.name} imgUrl={item.imgUrl} 
-        author={item.author}/>
-      })}
-      
-    </div>
-  );
+      <div>
+        {/* {items.map((item) => {
+          return <YoutubeItem key={item.id} id={item.id} name={item.name} imgUrl={item.imgUrl} 
+          author={item.author}/>
+        })}
+         */}
+      </div>
+    );
   }
-}
 
 export default YoutubeList;
