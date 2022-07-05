@@ -1,18 +1,16 @@
 import React from 'react';
 interface IYoutubeItemProps {
-  id: number,
-  name: string,
+  id: string,
+  title: string
   imgUrl: string,
-  author: string,
 }
 
-function YoutubeItem({id, name, imgUrl, author} : IYoutubeItemProps) {
+function YoutubeItem({id, title, imgUrl} : IYoutubeItemProps) {
   return (
     <div className='product-item' style={{display: "flex", flexDirection: "row", marginTop: "10px"}}>
-      <img src={imgUrl} alt={name} />
+      <img src={imgUrl} alt='' />
       <div>
-        <strong>{name}</strong>
-        <p>{author}</p>
+        <strong>{title}</strong>
       </div>
     </div>
   );
