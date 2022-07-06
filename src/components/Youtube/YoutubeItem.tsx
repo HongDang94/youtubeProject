@@ -7,12 +7,12 @@ interface IYoutubeItemProps {
 
 function YoutubeItem({id, title, imgUrl} : IYoutubeItemProps) {
   return (
-    <div className='product-item' style={{display: "flex", flexDirection: "row", marginTop: "10px"}}>
+    <a href="#" className='product-item' style={{display: "flex", flexDirection: "row", marginTop: "10px"}}>
       <img src={imgUrl} alt='' />
       <div>
         <strong>{title}</strong>
       </div>
-    </div>
+    </a>
   );
 }
 

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import YoutubeItem from './YoutubeItem';
 
@@ -93,36 +94,39 @@ function YoutubeList() {
   // const YOUTUBE_API = `${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&playlistId=PL_-VfJajZj0UXjlKfBwFX73usByw3Ph9Q&key=AIzaSyAu98HTMZj3bKE4K6YpZ9Q2hN_C8WMn4DY`
 
   useEffect(() => {
-    fetch("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PL_-VfJajZj0UXjlKfBwFX73usByw3Ph9Q&key=AIzaSyAu98HTMZj3bKE4K6YpZ9Q2hN_C8WMn4DY")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          //return ra mảng
-          setItems(result.items.map((i:any)=>{
-            return({
-              id: i.snippet.id,
-              thumbnails: {
-                default: i.snippet.thumbnails.default.url,
-                // high: string;
-                // maxres: string;
-                // medium: string;
-                // standard: string;
-              },
-              title: i.snippet.title,
-            })
-          }));
-          console.log(result.items)
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
+    axios.get("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PL_-VfJajZj0UXjlKfBwFX73usByw3Ph9Q&key=AIzaSyAu98HTMZj3bKE4K6YpZ9Q2hN_C8WMn4DY")
+      // .then(
+      //   (result) => {
+      //     setIsLoaded(true);
+      //     //return ra mảng 
+      //     setItems(result.items.map((i:any)=>{
+      //       return({
+      //         id: i.snippet.id,
+      //         thumbnails: {
+      //           default: i.snippet.thumbnails.default.url,
+      //           // high: string;
+      //           // maxres: string;
+      //           // medium: string;
+      //           // standard: string;
+      //         },
+      //         title: i.snippet.title,
+      //       })
+      //     }));
+      //     console.log(result.items)
+      //   },
+      //   // Note: it's important to handle errors here
+      //   // instead of a catch() block so that we don't swallow
+      //   // exceptions from actual bugs in components.
+      //   (error) => {
+      //     setIsLoaded(true);
+      //     setError(error);
+      //   }
         
-      )
+      // )
+      .then((res) => {
+        setIsLoaded(true);
+        console.log(res.data.items)
+      })
   }, [])
 
   if (error) {
